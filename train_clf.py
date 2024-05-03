@@ -4,7 +4,7 @@
 """
 
 import os, gc, time
-from utils.utils import train_clf, val_clf
+from utils.utils import train_clf, val_clf, count_parameters
 from simple_cnn import SimpleCNN
 from custom_image_dset_from_folder import split_indices, CustomImageDataset
 
@@ -80,6 +80,7 @@ if __name__ == "__main__":
     model = SimpleCNN(num_classes=num_classes)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.0001)
+    print('\nNum Trainable Parameters: ', count_parameters(model), '\n')
 
     ##train and validate
     model, train_loss, hist = train_clf(model, train_loader, val_loader, criterion,
